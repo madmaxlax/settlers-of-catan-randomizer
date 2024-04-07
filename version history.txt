@@ -1,0 +1,3 @@
+original version uses an algorithm biased towards placing low numbered tiles earlier
+
+version one uses a 1/19 for each slot, providing a perfectly random board

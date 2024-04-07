@@ -1,0 +1,217 @@
+<html>
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="keywords" content="Settlers of Catan settlersofcatan random board setup generator" />
+<meta name="description" content="A site developed by Max Struever and Zev Arnold that provides a random board setup for a game of Settlers of Catan" />
+<title>Settlers Setup</title>
+</head>
+
+<style type="text/css">
+<!--
+
+*{margin:0}
+
+img {
+	border-style: none;
+}
+
+.numberTile{
+	position: absolute;
+	display: block;	
+}
+
+.port{
+	position: absolute;
+	display: block;
+}
+
+#terrainTable{
+	position: absolute;
+}
+
+#firstRow{
+	position: absolute;
+}
+
+#secondRow{
+	position: absolute;
+}
+
+#thirdRow{
+	position: absolute;
+}
+
+#fourthRow{
+	position: absolute;
+}
+
+#fifthRow{
+	position: absolute;
+}
+
+</style>
+
+<script language="JavaScript">
+
+var landDir = "images/130x150land/";
+var tileDir = "images/130x150tile/";
+var seaDir = "images/130x150sea/";
+var hexWidth = 130;
+var hexHeight = 150;
+var portHeight = Math.floor(.3467 * hexHeight); //not the actual width of the image, just the amount I need to bump the terrain down
+var portWidth = Math.floor(.3231 * hexWidth); //not the actual width of the image, just the amount I need to bump the terrain over
+
+function arrangeBoard()
+{
+	///////Shift rows so that the hexes line up nicely
+	var rowHeight = Math.floor(hexHeight*.7533);
+
+	document.getElementById("firstRow").style.left = hexWidth + "px";
+	document.getElementById("firstRow").style.top = "0px";
+	
+	document.getElementById("secondRow").style.left = (hexWidth/2) + "px";
+	document.getElementById("secondRow").style.top = rowHeight + "px";
+
+	document.getElementById("thirdRow").style.left = "0px";
+	document.getElementById("thirdRow").style.top = (rowHeight * 2) + "px";
+
+	document.getElementById("fourthRow").style.left = (hexWidth/2) + "px";
+	document.getElementById("fourthRow").style.top = (rowHeight * 3 )+ "px";
+
+	document.getElementById("fifthRow").style.left = hexWidth + "px";
+	document.getElementById("fifthRow").style.top = (rowHeight * 4) + "px";
+
+	////////Size empty table cells to ensure that my table doesn't fuck up
+	var x;
+	for(x=1;x<7;x++)
+	{
+		document.getElementById("empty" + x).width = hexWidth;
+	}
+	for(x=1;x<20;x++)
+	{		
+		document.getElementById("terrain" + x).width = hexWidth;
+	}
+
+	///////Bump the terrain so that we can fit in ports
+	document.getElementById("terrainTable").style.left = portWidth;
+	document.getElementById("terrainTable").style.top = portHeight;
+
+	//////Arrange port images
+	document.getElementById("seaD").style.left = -Math.floor(.3100 * hexWidth);
+	document.getElementById("seaD").style.top = -50;
+}
+
+function writeTerrain()
+{
+	var terrain = ['F','F','F','F','M','M','M','H','H','H','P','P','P','P','S','S','S','S','D'];
+	var tiles = [11, 3, 6, 5, 4, 9, 10, 8, 4, 11, 12, 9, 10, 8, 3, 6, 2, 5];
+
+	var currentTerrain;
+	var currentTile;
+	var terrainIteration = 0;
+	
+	while(terrain.length > 0)
+	{	
+		terrainIteration++;
+		currentTerrain = Math.floor(Math.random()*terrain.length);
+
+		if(terrain[currentTerrain] == 'M'){
+			currentTile = tiles.pop();
+			document.getElementById("tile" + terrainIteration).src = tileDir + "tile" + currentTile + ".gif";
+			document.getElementById("terrain" + terrainIteration).src = landDir + "mountain.gif";
+		}else if(terrain[currentTerrain] == 'H'){
+			currentTile = tiles.pop();
+			document.getElementById("tile" + terrainIteration).src = tileDir + "tile" + currentTile + ".gif";
+			document.getElementById("terrain" + terrainIteration).src = landDir + "hill.gif";
+		}else if(terrain[currentTerrain] == 'F'){
+			currentTile = tiles.pop();
+			document.getElementById("tile" + terrainIteration).src = tileDir + "tile" + currentTile + ".gif";
+			document.getElementById("terrain" + terrainIteration).src = landDir + "forest.gif";
+		}else if(terrain[currentTerrain] == 'P'){
+			currentTile = tiles.pop();
+			document.getElementById("tile" + terrainIteration).src = tileDir + "tile" + currentTile + ".gif";
+			document.getElementById("terrain" + terrainIteration).src = landDir + "grassland.gif";
+		}else if(terrain[currentTerrain] == 'S'){
+			currentTile = tiles.pop();
+			document.getElementById("tile" + terrainIteration).src = tileDir + "tile" + currentTile + ".gif";
+			document.getElementById("terrain" + terrainIteration).src = landDir + "pasture.gif";
+		}else if(terrain[currentTerrain] == 'D'){
+			document.getElementById("terrain" + terrainIteration).src = landDir + "desert.gif";
+			document.getElementById("tile" + terrainIteration).style.display = "none";
+		}
+		
+		terrain.splice(currentTerrain, 1);
+	}
+	return;
+}
+
+function writeSea()
+{
+	var alphabet = ['A', 'B', 'C', 'D', 'E', 'F'];
+	for(x=0;x<6;x++)
+	{
+		document.getElementById("sea" + alphabet[x]).src = seaDir + "1sea" + alphabet[x] + ".gif";
+	}
+}
+
+function init()
+{
+	arrangeBoard();
+	writeTerrain();
+	writeSea();
+}
+
+</script>
+
+<body onLoad="init()">
+
+<img id="seaC" style="position:absolute"/>
+<img id="seaE" style="position:absolute"/>
+<img id="seaB" style="position:absolute"/>
+<img id="seaF" style="position:absolute"/>
+<img id="seaA" style="position:absolute"/>
+
+<div id="terrainTable">
+<table border="0" cellpadding="0" cellspacing="0">
+<tr id="firstRow">
+<td><div><center><img class="numberTile" id="tile1"/></center><img id="terrain1"/></div></td>
+<td><div><center><img id="seaD" class="port"/><img class="numberTile" id="tile2"/></center><img id="terrain2"/></div></td>
+<td><div><center><img class="numberTile" id="tile3"/></center><img id="terrain3"/></div></td>
+<td id="empty1"></td>
+<td id="empty2"></td>
+</tr>
+<tr id="secondRow">
+<td><div><center><img class="numberTile" id="tile12"/></center><img id="terrain12"/></div></td>
+<td><div><center><img class="numberTile" id="tile13"/></center><img id="terrain13"/></div></td>
+<td><div><center><img class="numberTile" id="tile14"/></center><img id="terrain14"/></div></td>
+<td><div><center><img class="numberTile" id="tile4"/></center><img id="terrain4"/></div></td>
+<td id="empty3"></td>
+</tr>
+<tr id="thirdRow">
+<td><div><center><img class="numberTile" id="tile11"/></center><img id="terrain11"/></div></td>
+<td><div><center><img class="numberTile" id="tile18"/></center><img id="terrain18"/></div></td>
+<td><div><center><img class="numberTile" id="tile19"/></center><img id="terrain19"/></div></td>
+<td><div><center><img class="numberTile" id="tile15"/></center><img id="terrain15"/></div></td>
+<td><div><center><img class="numberTile" id="tile5"/></center><img id="terrain5"/></div></td>
+</tr>
+<tr id="fourthRow">
+<td><div><center><img class="numberTile" id="tile10"/></center><img id="terrain10"/></div></td>
+<td><div><center><img class="numberTile" id="tile17"/></center><img id="terrain17"/></div></td>
+<td><div><center><img class="numberTile" id="tile16"/></center><img id="terrain16"/></div></td>
+<td><div><center><img class="numberTile" id="tile6"/></center><img id="terrain6"/></div></td>
+<td id="empty4"></td>
+</tr>
+<tr id="fifthRow">
+<td><div><center><img class="numberTile" id="tile9"/></center><img id="terrain9"/></div></td>
+<td><div><center><img class="numberTile" id="tile8"/></center><img id="terrain8"/></div></td>
+<td><div><center><img class="numberTile" id="tile7"/></center><img id="terrain7"/></div></td>
+<td id="empty5"></td>
+<td id="empty6"></td>
+</tr>
+</table>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<html>
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Settlers Setup</title>
+
+<script language="JavaScript">
+function writeSetup()
+{
+	var terrain = ['M','M','M','H','H','H','F','F','F','F','P','P','P','P','S','S','S','S','D'];
+	var tiles = [11, 3, 6, 5, 4, 9, 10, 8, 4, 11, 12, 9, 10, 8, 3, 6, 2, 5];
+
+	var currentTerrain
+	var currentTile;
+	
+	while(terrain.length > 0)
+	{	
+		//document.write("INFO: terrain.length="+terrain.length+"<br>");
+		currentTerrain = Math.floor(Math.random()*terrain.length);
+		currentTile = tiles.pop();
+						
+		if(terrain[currentTerrain] == 'M'){
+			document.write("Mountain "+currentTile+"<br>");
+			terrain.splice(currentTerrain, 1);
+		}else if(terrain[currentTerrain] == 'H'){
+			document.write("Hill "+currentTile+"<br>");
+			terrain.splice(currentTerrain, 1);
+		}else if(terrain[currentTerrain] == 'P'){
+			document.write("Plain "+currentTile+"<br>");
+			terrain.splice(currentTerrain, 1);
+		}else if(terrain[currentTerrain] == 'F'){
+			document.write("Forest "+currentTile+"<br>");
+			terrain.splice(currentTerrain, 1);
+		}else if(terrain[currentTerrain] == 'S'){
+			document.write("Pasture "+currentTile+"<br>");
+			terrain.splice(currentTerrain, 1);
+		}else if(terrain[currentTerrain] == 'D'){
+			document.write("Desert<br>");
+			terrain.splice(currentTerrain, 1);
+			tiles.push(currentTile);
+		}else{
+			document.write("ERROR: currentTerrain:" + currentTerrain +"<br>");
+		}
+	}
+	document.write("<p>How's That?");
+	return;
+}
+</script>
+
+
+
+</head
+
+<body onLoad="writeSetup();"/>
+
+</html>

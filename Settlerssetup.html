@@ -1,0 +1,59 @@
+<html>
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Settlers Setup</title>
+
+<script language="JavaScript">
+function writeSetup()
+{
+	var mountain = 3;
+	var hill = 3;
+	var plain = 4;
+	var forest = 4;
+	var pasture = 4;
+	var desert = 1;
+
+	var tilesPlaced = 0;
+	var currentTile = 0;
+	
+	while(tilesPlaced < 19)
+	{	
+		currentTile = Math.floor(Math.random()*6);
+		if(currentTile == 0 && mountain > 0){
+			document.write("Mountain<br>");
+			mountain--;
+			tilesPlaced++;
+		}else if(currentTile == 1 && hill > 0){
+			document.write("Hill<br>");
+			hill--;
+			tilesPlaced++;
+		}else if(currentTile == 2 && plain > 0){
+			document.write("Plain<br>");
+			plain--;
+			tilesPlaced++;
+		}else if(currentTile == 3 && forest > 0){
+			document.write("Forest<br>");
+			forest--;
+			tilesPlaced++;
+		}else if(currentTile == 4 && pasture > 0){
+			document.write("Pasture<br>");
+			pasture--;
+			tilesPlaced++;
+		}else if(currentTile == 5 && desert > 0){
+			document.write("Desert<br>");
+			desert--;
+			tilesPlaced++;
+		}
+	}
+	document.write("<p>How's That?");
+}
+</script>
+
+
+
+</head
+
+<body onLoad="writeSetup();"/>
+
+</html>

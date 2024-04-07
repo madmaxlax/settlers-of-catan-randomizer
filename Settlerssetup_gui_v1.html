@@ -1,0 +1,130 @@
+<html>
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Settlers Setup</title>
+</head>
+
+<style type="text/css">
+<!--
+
+*{margin:0}
+
+img {
+	border-style: none;
+}
+
+#firstRow{
+	position: absolute;
+	left: 130px;
+	top: 0px;
+}
+
+#secondRow{
+	position: absolute;
+	left: 65px;
+	top: 113px;
+}
+
+#thirdRow{
+	position: absolute;
+	left: 0px;
+	top: 226;
+}
+
+#fourthRow{
+	position: absolute;
+	left: 65px;
+	top: 339;
+}
+
+#fifthRow{
+	position: absolute;
+	left: 130px;
+	top: 452px;
+}
+
+</style>
+
+<script language="JavaScript">
+
+function writeTerrain(terrainType, imgID)
+{
+	if(terrainType == 'M'){
+		document.getElementById(imgID).src = "images/mountain.gif";
+	}else if(terrainType == 'H'){
+		document.getElementById(imgID).src = "images/hill.gif";
+	}else if(terrainType == 'F'){
+		document.getElementById(imgID).src = "images/forest.gif";
+	}else if(terrainType == 'P'){
+		document.getElementById(imgID).src = "images/grassland.gif";
+	}else if(terrainType == 'S'){
+		document.getElementById(imgID).src = "images/pasture.gif";
+	}else if(terrainType == 'D'){
+		document.getElementById(imgID).src = "images/desert.gif";
+	}
+} 
+
+function writeSetup()
+{
+	var terrain = ['F','F','F','F','M','M','M','H','H','H','P','P','P','P','S','S','S','S','D'];
+	var tiles = [11, 3, 6, 5, 4, 9, 10, 8, 4, 11, 12, 9, 10, 8, 3, 6, 2, 5];
+
+	var currentTerrain;
+	var currentTile;
+	var terrainIteration = 0;
+	
+	while(terrain.length > 0)
+	{	
+		terrainIteration++;
+		currentTerrain = Math.floor(Math.random()*terrain.length);
+		currentTile = tiles.pop();
+		
+		writeTerrain(terrain[currentTerrain], "terrain" + terrainIteration);
+		terrain.splice(currentTerrain, 1);
+	}
+	return;
+}
+</script>
+
+<body onLoad="writeSetup()">
+<table border="0" cellpadding="0" cellspacing="0">
+<tr id="firstRow">
+<td></td>
+<td><img src="images/mountain.gif" id="terrain1"/></td>
+<td><img src="images/mountain.gif" id="terrain2"/></td>
+<td><img src="images/mountain.gif" id="terrain3"/></td>
+<td></td>
+</tr>
+<tr id="secondRow">
+<td><img src="images/mountain.gif" id="terrain12"/></td>
+<td><img src="images/mountain.gif" id="terrain13"/></td>
+<td><img src="images/desert.gif" id="terrain14"/></td>
+<td><img src="images/mountain.gif" id="terrain4"/></td>
+</tr>
+<tr id="thirdRow">
+<td><img src="images/mountain.gif" id="terrain11"/></td>
+<td><img src="images/hill.gif" id="terrain18"/></td>
+<td><img src="images/forest.gif" id="terrain19"/></td>
+<td><img src="images/grassland.gif" id="terrain15"/></td>
+<td><img src="images/mountain.gif" id="terrain5"/></td>
+</tr>
+<tr id="fourthRow">
+<td><img src="images/mountain.gif" id="terrain10"/></td>
+<td><img src="images/mountain.gif" id="terrain17"/></td>
+<td><img src="images/pasture.gif" id="terrain16"/></td>
+<td><img src="images/mountain.gif" id="terrain6"/></td>
+</tr>
+<tr id="fifthRow">
+<td></td>
+<td><img src="images/mountain.gif" id="terrain9"/></td>
+<td><img src="images/mountain.gif" id="terrain8"/></td>
+<td><img src="images/mountain.gif" id="terrain7"/></td>
+<td></td>
+</tr>
+
+</table>
+
+</body>
+
+</html>

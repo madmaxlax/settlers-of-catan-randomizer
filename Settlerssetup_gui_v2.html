@@ -1,0 +1,168 @@
+<html>
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Settlers Setup</title>
+</head>
+
+<style type="text/css">
+<!--
+
+*{margin:0}
+
+img {
+	border-style: none;
+}
+
+.numberTile{
+	position: absolute;
+	display: block;	
+}
+
+#firstRow{
+	position: absolute;
+	left: 130px;
+	top: 0px;
+}
+
+#secondRow{
+	position: absolute;
+	left: 65px;
+	top: 113px;
+}
+
+#thirdRow{
+	position: absolute;
+	left: 0px;
+	top: 226px;
+}
+
+#fourthRow{
+	position: absolute;
+	left: 65px;
+	top: 339px;
+}
+
+#fifthRow{
+	position: absolute;
+	left: 130px;
+	top: 452px;
+}
+
+</style>
+
+<script language="JavaScript">
+
+var hexWidth = 130;
+var hexHeight = 150;
+
+function arrangeTable()
+{
+	var rowHeight = Math.floor(hexHeight*.7533);
+
+	document.getElementById("firstRow").style.left = hexWidth + "px";
+	document.getElementById("firstRow").style.top = "0px";
+	
+	document.getElementById("secondRow").style.left = (hexWidth/2) + "px";
+	document.getElementById("secondRow").style.top = rowHeight + "px";
+
+	document.getElementById("thirdRow").style.left = "0px";
+	document.getElementById("thirdRow").style.top = (rowHeight * 2) + "px";
+
+	document.getElementById("fourthRow").style.left = (hexWidth/2) + "px";
+	document.getElementById("fourthRow").style.top = (rowHeight * 3 )+ "px";
+
+	document.getElementById("fifthRow").style.left = hexWidth + "px";
+	document.getElementById("fifthRow").style.top = (rowHeight * 4) + "px";
+}
+
+function writeTerrain(terrainType, imgID)
+{
+	if(terrainType == 'M'){
+		document.getElementById(imgID).src = "images/mountain.gif";
+	}else if(terrainType == 'H'){
+		document.getElementById(imgID).src = "images/hill.gif";
+	}else if(terrainType == 'F'){
+		document.getElementById(imgID).src = "images/forest.gif";
+	}else if(terrainType == 'P'){
+		document.getElementById(imgID).src = "images/grassland.gif";
+	}else if(terrainType == 'S'){
+		document.getElementById(imgID).src = "images/pasture.gif";
+	}else if(terrainType == 'D'){
+		document.getElementById(imgID).src = "images/desert.gif";
+	}
+} 
+
+function writeBoard()
+{
+	arrangeTable();
+
+	var terrain = ['F','F','F','F','M','M','M','H','H','H','P','P','P','P','S','S','S','S','D'];
+	var tiles = [11, 3, 6, 5, 4, 9, 10, 8, 4, 11, 12, 9, 10, 8, 3, 6, 2, 5];
+
+	var currentTerrain;
+	var currentTile;
+	var terrainIteration = 0;
+	
+	while(terrain.length > 0)
+	{	
+		terrainIteration++;
+		currentTerrain = Math.floor(Math.random()*terrain.length);
+		
+		if(terrain[currentTerrain] != 'D'){
+			currentTile = tiles.pop();
+			document.getElementById("tile" + terrainIteration).src = "images/tile" + currentTile + ".gif";
+		}else{
+			document.getElementById("tile" + terrainIteration).style.display = "none";
+		}
+
+		writeTerrain(terrain[currentTerrain], "terrain" + terrainIteration);
+		terrain.splice(currentTerrain, 1);
+	}
+	return;
+}
+</script>
+
+<body onLoad="writeBoard()">
+<table border="0" cellpadding="0" cellspacing="0">
+<tr id="firstRow">
+<td><div><center><img class="numberTile" id="tile1"/></center><img src="images/mountain.gif" id="terrain1"/></div></td>
+<td><div><center><img class="numberTile" id="tile2"/></center><img src="images/mountain.gif" id="terrain2"/></div></td>
+<td><div><center><img class="numberTile" id="tile3"/></center><img src="images/mountain.gif" id="terrain3"/></div></td>
+<td></td>
+<td></td>
+</tr>
+<tr id="secondRow">
+<td><div><center><img class="numberTile" id="tile12"/></center><img src="images/mountain.gif" id="terrain12"/></div></td>
+<td><div><center><img class="numberTile" id="tile13"/></center><img src="images/mountain.gif" id="terrain13"/></div></td>
+<td><div><center><img class="numberTile" id="tile14"/></center><img src="images/desert.gif" id="terrain14"/></div></td>
+<td><div><center><img class="numberTile" id="tile4"/></center><img src="images/mountain.gif" id="terrain4"/></div></td>
+<td></td>
+</tr>
+<tr id="thirdRow">
+<td><div><center><img class="numberTile" id="tile11"/></center><img src="images/mountain.gif" id="terrain11"/></div></td>
+<td><div><center><img class="numberTile" id="tile18"/></center><img src="images/hill.gif" id="terrain18"/></div></td>
+<td><div><center><img class="numberTile" id="tile19"/></center><img src="images/forest.gif" id="terrain19"/></div></td>
+<td><div><center><img class="numberTile" id="tile15"/></center><img src="images/grassland.gif" id="terrain15"/></div></td>
+<td><div><center><img class="numberTile" id="tile5"/></center><img src="images/mountain.gif" id="terrain5"/></div></td>
+</tr>
+<tr id="fourthRow">
+<td><div><center><img class="numberTile" id="tile10"/></center><img src="images/mountain.gif" id="terrain10"/></div></td>
+<td><div><center><img class="numberTile" id="tile17"/></center><img src="images/mountain.gif" id="terrain17"/></div></td>
+<td><div><center><img class="numberTile" id="tile16"/></center><img src="images/pasture.gif" id="terrain16"/></div></td>
+<td><div><center><img class="numberTile" id="tile6"/></center><img src="images/mountain.gif" id="terrain6"/></div></td>
+<td></td>
+</tr>
+<tr id="fifthRow">
+<td><div><center><img class="numberTile" id="tile9"/></center><img src="images/mountain.gif" id="terrain9"/></div></td>
+<td><div><center><img class="numberTile" id="tile8"/></center><img src="images/mountain.gif" id="terrain8"/></div></td>
+<td><div><center><img class="numberTile" id="tile7"/></center><img src="images/mountain.gif" id="terrain7"/></div></td>
+<td></td>
+<td></td>
+</tr>
+
+</table>
+
+</body>
+
+</html>
